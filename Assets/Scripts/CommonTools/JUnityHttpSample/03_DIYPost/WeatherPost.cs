@@ -1,37 +1,27 @@
 using System;
-using System.Collections.Generic;
+using CommonTools.JUnityHttp;
+using UnityEngine.Networking;
 
-namespace CommonTools.JUnityHttp.Sample.QuickStart
+namespace CommonTools.JUnityHttpSample
 {
-    public class TaoBaoGet<T> : Get
+    public class WeatherPost<T>: RequestBase where T : class
     {
-        public TaoBaoGet(string url) : base(url)
+        //Discuss with back-end engineer to use only one data format globally. (DRY) or you need to write more than one another response-class.
+        private class Response<T1> where T1 : class
         {
-        }
-
-        public class Response<T1>
-        {
-            public string api { get; set; }
-            public string v { get; set; }
-            public List<string> ret { get; set; }
-            public T1 data { get; set; }
+            public string status { get; set; }
+            public string msg { get; set; }
+            public T1 result { get; set; }
 
             public bool IsSuccess()
             {
-                return Status().Contains("SUCCESS");
-            }
-
-            public string Status()
-            {
-                if (ret != null && ret.Count > 0)
-                {
-                    return ret[0];
-                }
-
-                return "";
+                return status == "0";
             }
         }
-
+        
+        public WeatherPost(string url) : base(url)
+        {
+        }
 
         protected override void Complete()
         {
@@ -55,13 +45,13 @@ namespace CommonTools.JUnityHttp.Sample.QuickStart
                     {
                         if (tmpData.IsSuccess())
                         {
-                            this.result = tmpData.data;
+                            this.result = tmpData.result;
                             onSuccess?.Invoke(this);
                         }
                         else
                         {
                             isSuccess = false;
-                            error = $"recv error status={tmpData.Status()}";
+                            error = $"recv error status={tmpData.status} msg={tmpData.msg}";
                             onFailure?.Invoke(this);
                         }
                     }
@@ -88,6 +78,17 @@ namespace CommonTools.JUnityHttp.Sample.QuickStart
             }
 
             onComplete?.Invoke(this);
+        }
+
+        protected override void Prepare()
+        {
+            base.Prepare();
+            loger?.Log($"Send-SamplePost={url}\nquest={questData.ToJson()}\n header={string.Join(",",header)}");
+        }
+        
+        public override UnityWebRequest CreateRequest()
+        {
+            return UnityWebRequest.Post(url, questData);
         }
     }
 }

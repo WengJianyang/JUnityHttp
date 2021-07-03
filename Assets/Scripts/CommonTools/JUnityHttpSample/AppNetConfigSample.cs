@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using CommonTools.JUnityHttp;
 using CommonTools.JUnityHttp.Cache;
 using UnityEngine;
 
-namespace CommonTools.JUnityHttp.Sample
+namespace CommonTools.JUnityHttpSample
 {
     public class AppNetConfigSample : IHttpHeader, IHttpLog
     {
@@ -17,7 +18,7 @@ namespace CommonTools.JUnityHttp.Sample
 
             //set cacher
             RequestBase.cacher = HttpCacheDefault.Instance;
-            //using version ,if version change,old cache date will be removed
+            //using version ,if version change,old date of cache will be removed
             HttpCacheDefault.Instance.version = "1";
             //set global max age for each requset
             RequestBase.globalMaxAge = 3600000; //

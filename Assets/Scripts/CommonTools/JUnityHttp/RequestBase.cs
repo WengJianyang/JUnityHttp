@@ -69,7 +69,7 @@ namespace CommonTools.JUnityHttp
             this.url = url;
         }
 
-        public RequestBase AddHeader(string key, object value)
+        public RequestBase SetHeader(string key, object value)
         {
             if (header == null)
             {
@@ -140,7 +140,7 @@ namespace CommonTools.JUnityHttp
                 {
                     foreach (var keyValuePair in tmpHeaders)
                     {
-                        AddHeader(keyValuePair.Key, keyValuePair.Value);
+                        SetHeader(keyValuePair.Key, keyValuePair.Value);
                     }
                 }
             }

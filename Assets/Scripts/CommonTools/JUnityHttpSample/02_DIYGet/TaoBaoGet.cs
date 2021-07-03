@@ -1,26 +1,38 @@
 using System;
-using UnityEngine.Networking;
+using System.Collections.Generic;
+using CommonTools.JUnityHttp;
 
-namespace CommonTools.JUnityHttp.Sample
+namespace CommonTools.JUnityHttpSample
 {
-    public class WeatherPost<T>: RequestBase where T : class
+    public class TaoBaoGet<T> : Get
     {
-        //Discuss with back-end engineer to use only one data format globally. (DRY) or you need to write one another Response class.
-        private class Response<T1> where T1 : class
+        public TaoBaoGet(string url) : base(url)
         {
-            public string status { get; set; }
-            public string msg { get; set; }
-            public T1 result { get; set; }
+        }
+
+        public class Response<T1>
+        {
+            public string api { get; set; }
+            public string v { get; set; }
+            public List<string> ret { get; set; }
+            public T1 data { get; set; }
 
             public bool IsSuccess()
             {
-                return status == "0";
+                return Status().Contains("SUCCESS");
+            }
+
+            public string Status()
+            {
+                if (ret != null && ret.Count > 0)
+                {
+                    return ret[0];
+                }
+
+                return "";
             }
         }
-        
-        public WeatherPost(string url) : base(url)
-        {
-        }
+
 
         protected override void Complete()
         {
@@ -44,13 +56,13 @@ namespace CommonTools.JUnityHttp.Sample
                     {
                         if (tmpData.IsSuccess())
                         {
-                            this.result = tmpData.result;
+                            this.result = tmpData.data;
                             onSuccess?.Invoke(this);
                         }
                         else
                         {
                             isSuccess = false;
-                            error = $"recv error status={tmpData.status} msg={tmpData.msg}";
+                            error = $"recv error status={tmpData.Status()}";
                             onFailure?.Invoke(this);
                         }
                     }
@@ -77,17 +89,6 @@ namespace CommonTools.JUnityHttp.Sample
             }
 
             onComplete?.Invoke(this);
-        }
-
-        protected override void Prepare()
-        {
-            base.Prepare();
-            loger?.Log($"Send-SamplePost={url}\nquest={questData.ToJson()}\n header={string.Join(",",header)}");
-        }
-        
-        public override UnityWebRequest CreateRequest()
-        {
-            return UnityWebRequest.Post(url, questData);
         }
     }
 }

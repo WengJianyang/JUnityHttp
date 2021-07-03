@@ -1,4 +1,4 @@
-namespace CommonTools.JUnityHttp.Sample
+namespace CommonTools.JUnityHttpSample
 {
     public class JWeatherInfo
     {

@@ -17,7 +17,7 @@ namespace CommonTools.JUnityHttp
                 requestBase.SendBy(sender, () =>
                 {
                     reqCount--;
-                    //As long as one of the request failed, the other pending requests will abort
+                    //As long as one of the request failed, the other requests will abort
                     if (!requestBase.isSuccess && !hadFailed)
                     {
                         hadFailed = true;

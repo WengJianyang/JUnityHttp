@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace CommonTools.JUnityHttp.Sample
+namespace CommonTools.JUnityHttpSample
 {
     public static class JsonExtensions 
     {
