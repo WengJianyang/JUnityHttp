@@ -22,7 +22,7 @@ namespace CommonTools.JUnityHttp
                     {
                         hadFailed = true;
                         Abort();
-                        onFailed?.Invoke(requestBase.error);
+                        onFailure?.Invoke(requestBase.error);
                         onComplete?.Invoke();
                     }
 

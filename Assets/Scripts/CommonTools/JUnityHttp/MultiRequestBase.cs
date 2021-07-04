@@ -8,7 +8,7 @@ namespace CommonTools.JUnityHttp
     {
         protected List<RequestBase> requests { get; private set; } = null;
         protected Action<MultiRequestBase> onSuccess;
-        protected Action<string> onFailed;
+        protected Action<string> onFailure;
         protected Action onComplete;
 
         public MultiRequestBase(params RequestBase[] requestBases)
@@ -39,9 +39,9 @@ namespace CommonTools.JUnityHttp
             return this;
         }
 
-        public MultiRequestBase OnFailed(Action<string> action)
+        public MultiRequestBase OnFailure(Action<string> action)
         {
-            onFailed = action;
+            onFailure = action;
             return this;
         }
 

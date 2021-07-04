@@ -4,10 +4,11 @@ using UnityEngine;
 
 namespace CommonTools.JUnityHttpSample
 {
-    public class ParallelSample : MonoBehaviour
+    public class ParallelRequestSample : MonoBehaviour
     {
         private void Start()
         {
+            //setup global config
             AppNetConfigSample.Init();
 
             var request1 = new Get(ApiUrl.BaiDuDoMain);
@@ -30,7 +31,7 @@ namespace CommonTools.JUnityHttpSample
                     request3.GetResult(out JWeatherInfo info);
                     Debug.Log($"city={info.city},weather={info.weather},week={info.week},date={info.date}");
                 })
-                .OnFailed(p => { Debug.Log($"并行请求失败{p}"); })
+                .OnFailure(p => { Debug.Log($"Parallel requests were failed ,msg={p}"); })
                 .SendBy(this);
         }
     }

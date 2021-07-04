@@ -7,10 +7,8 @@ namespace CommonTools.JUnityHttpSample
     {
         private void Start()
         {
-            AppNetConfigSample.Init();
-
             new WeatherPost<JWeatherInfo>(ApiUrl.WeatherInfo)
-                .AddData(ApiKey.city, "上海")
+                .SetHeader("Authorization", "APPCODE 70d20881c6e54725a5d2c63598c9cf64")
                 .AddData(ApiKey.cityid, 24)
                 .OnFailure(_ => { Debug.LogError(_.error); })
                 .OnSuccess(_ =>
