@@ -1,7 +1,9 @@
+[中文说明](README_CN.md)
+
 # JUnityHttp
-[中文文档](README_CN.md): quick start.
-I am a more convenient way for making http requests in unity base on UnityWebRequest.
-If UnityWebRequest works well on your project, so does JUnityHttp.
+
+* I am a more convenient way for making http requests in unity base on UnityWebRequest.
+* If UnityWebRequest works well on your project, so does JUnityHttp.
 
 ## Features
 

@@ -1,6 +1,6 @@
 # JUnityHttp
-一个更省事的方式在unity里边去发送http请求，基于UnityWebRequest。
-如果UnityWebRequest能完成你项目的功能，那么JUnityHttp也行
+* 一个更省事的方式在unity里边去发送http请求，基于UnityWebRequest。
+* 如果UnityWebRequest能完成你项目的功能，那么JUnityHttp也行。
 
 ## 功能点
 
