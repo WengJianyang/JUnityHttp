@@ -19,7 +19,7 @@ namespace CommonTools.JUnityHttpSample
                 .OnSuccess(_ =>
                 {
                     _.GetResult(out JWeatherInfo info);
-                    _.Log($"city={info.city},weather={info.weather},week={info.week},date={info.date}");
+                    Debug.Log($"city={info.city},weather={info.weather},week={info.week},date={info.date}");
                 })
                 .Send();
         }
