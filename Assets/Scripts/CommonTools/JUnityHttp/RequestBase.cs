@@ -228,7 +228,7 @@ namespace CommonTools.JUnityHttp
         }
 
         /// <summary>
-        /// seconds
+        /// set timeout by seconds
         /// </summary>
         /// <param name="maxAge"></param>
         /// <returns></returns>
@@ -239,7 +239,7 @@ namespace CommonTools.JUnityHttp
         }
 
         /// <summary>
-        /// seconds
+        /// set max age by seconds
         /// </summary>
         /// <param name="maxAge"></param>
         /// <returns></returns>

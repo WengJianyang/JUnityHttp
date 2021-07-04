@@ -19,7 +19,7 @@ namespace CommonTools.JUnityHttpSample
             //set cacher
             RequestBase.cacher = HttpCacheDefault.Instance;
             //using version ,if version change,old date of cache will be removed
-            HttpCacheDefault.Instance.version = "1";
+            HttpCacheDefault.Instance.version = "0.0.1";
             //set global max age for each requset
             RequestBase.globalMaxAge = 3600000; //
             //Set cache path provider

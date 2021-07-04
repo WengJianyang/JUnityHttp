@@ -1,5 +1,6 @@
 # JUnityHttp
 I am a more convenient way for making http requests in unity base on UnityWebRequest.
+If UnityWebRequest works well on your project, so does JUnityHttp.
 
 ## Features
 
@@ -33,8 +34,8 @@ new Post("http://jisuqgtq.market.alicloudapi.com/weather/query")
 
 ## More example
 
-* [01_QuickStart](Assets/Scripts/CommonTools/JUnityHttpSample/01_QuickStart/): quick start。
-* [02_DIYGet](Assets/Scripts/CommonTools/JUnityHttpSample/02_DIYGet/):diy your get。
-* [03_DIYPost](Assets/Scripts/CommonTools/JUnityHttpSample/03_DIYPost/): diy your post。
-* [04_ParallelRequest](Assets/Scripts/CommonTools/JUnityHttpSample/04_ParallelRequest/): batch reqquest
-
+* [01_QuickStart](Assets/Scripts/CommonTools/JUnityHttpSample/01_QuickStart/): quick start.
+* [02_DIYGet](Assets/Scripts/CommonTools/JUnityHttpSample/02_DIYGet/):diy your get.
+* [03_DIYPost](Assets/Scripts/CommonTools/JUnityHttpSample/03_DIYPost/): diy your post.
+* [04_ParallelRequest](Assets/Scripts/CommonTools/JUnityHttpSample/04_ParallelRequest/): batch reqquest.
+* [05_ResponseCache](Assets/Scripts/CommonTools/JUnityHttpSample/05_ResponseCache/): response cache.
