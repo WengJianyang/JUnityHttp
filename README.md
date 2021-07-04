@@ -38,7 +38,7 @@ new Post("http://jisuqgtq.market.alicloudapi.com/weather/query")
 ## More example
 
 * [01_QuickStart](Assets/Scripts/CommonTools/JUnityHttpSample/01_QuickStart/QuickStart.cs): quick start.
-* [02_DIYGet](Assets/Scripts/CommonTools/JUnityHttpSample/02_DIYGet/DIYGetSample.cs):diy your get.
-* [03_DIYPost](Assets/Scripts/CommonTools/JUnityHttpSample/03_DIYPost/DIYPostSample.cs): diy your post.
+* [02_DIYGet](Assets/Scripts/CommonTools/JUnityHttpSample/02_DIYGet/):diy your get.
+* [03_DIYPost](Assets/Scripts/CommonTools/JUnityHttpSample/03_DIYPost/): diy your post.
 * [04_ParallelRequest](Assets/Scripts/CommonTools/JUnityHttpSample/04_ParallelRequest/ParallelRequestSample.cs): Batch requests, and call back when all are completed.
 * [05_ResponseCache](Assets/Scripts/CommonTools/JUnityHttpSample/05_ResponseCache/ResponseCacheSample.cs): response cache.
