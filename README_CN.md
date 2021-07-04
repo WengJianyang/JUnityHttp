@@ -35,7 +35,7 @@ new Post("http://jisuqgtq.market.alicloudapi.com/weather/query")
 ## 更多范例
 
 * [01_QuickStart](Assets/Scripts/CommonTools/JUnityHttpSample/01_QuickStart/QuickStart.cs):快速开始。
-* [02_DIYGet](Assets/Scripts/CommonTools/JUnityHttpSample/02_DIYGet/DIYGetSample.cs):自定义get。
-* [03_DIYPost](Assets/Scripts/CommonTools/JUnityHttpSample/03_DIYPost/DIYPostSample.cs): 自定义post。
+* [02_DIYGet](Assets/Scripts/CommonTools/JUnityHttpSample/02_DIYGet/):自定义get。
+* [03_DIYPost](Assets/Scripts/CommonTools/JUnityHttpSample/03_DIYPost/): 自定义post。
 * [04_ParallelRequest](Assets/Scripts/CommonTools/JUnityHttpSample/04_ParallelRequest/ParallelRequestSample.cs): 批量请求，并统一回调。
 * [05_ResponseCache](Assets/Scripts/CommonTools/JUnityHttpSample/05_ResponseCache/ResponseCacheSample.cs): 请求缓存。
