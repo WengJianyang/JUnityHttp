@@ -1,11 +1,12 @@
 # JUnityHttp
+[中文文档](README_CN.md): quick start.
 I am a more convenient way for making http requests in unity base on UnityWebRequest.
 If UnityWebRequest works well on your project, so does JUnityHttp.
 
 ## Features
 
 * Reactive request
-* Multiple requests
+* Batch requests, and call back when all are completed
 * Response can be cached by time and version
 
 ## Install
@@ -37,5 +38,5 @@ new Post("http://jisuqgtq.market.alicloudapi.com/weather/query")
 * [01_QuickStart](Assets/Scripts/CommonTools/JUnityHttpSample/01_QuickStart/): quick start.
 * [02_DIYGet](Assets/Scripts/CommonTools/JUnityHttpSample/02_DIYGet/):diy your get.
 * [03_DIYPost](Assets/Scripts/CommonTools/JUnityHttpSample/03_DIYPost/): diy your post.
-* [04_ParallelRequest](Assets/Scripts/CommonTools/JUnityHttpSample/04_ParallelRequest/): batch reqquest.
+* [04_ParallelRequest](Assets/Scripts/CommonTools/JUnityHttpSample/04_ParallelRequest/): Batch requests, and call back when all are completed.
 * [05_ResponseCache](Assets/Scripts/CommonTools/JUnityHttpSample/05_ResponseCache/): response cache.
