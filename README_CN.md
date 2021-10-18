@@ -10,7 +10,7 @@
 
 ## 安装
 
-拷贝 ~Assets/Scripts/CommonTools/JUnityHttp to your project
+拷贝 ~Assets/Scripts/CommonTools/JUnityHttp 到你的工程
 
 ## 快速开始
 
