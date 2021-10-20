@@ -20,6 +20,9 @@ namespace CommonTools.JUnityHttp
         public static IHttpLog loger;
         public static IHttpCache cacher;
 
+        private int _retryCount = 1;
+
+
         public string hash => $"{url}-{string.Join("-", questData)}";
 
         public int timeout
@@ -36,6 +39,11 @@ namespace CommonTools.JUnityHttp
         }
 
         public string error { get; protected set; } = null;
+
+
+        public bool isNetworkError { get; protected set; } = false;
+        public bool isHttpError { get; protected set; } = false;
+
         public string text { get; protected set; } = null;
         public object result { get; protected set; } = null;
         public bool isSuccess { get; protected set; } = false;
@@ -77,6 +85,12 @@ namespace CommonTools.JUnityHttp
             }
 
             header.Add(key, value.ToString());
+            return this;
+        }
+
+        public RequestBase SetRetry(ushort count)
+        {
+            _retryCount = count;
             return this;
         }
 
@@ -172,15 +186,6 @@ namespace CommonTools.JUnityHttp
             return DoSend(sender, done);
         }
 
-        public IEnumerator GetSendIEnumerator(Action done = null)
-        {
-            Prepare();
-            www = CreateRequest();
-            www.SetHeaders(header);
-            www.timeout = timeout;
-            return DoSendIE(www, done);
-        }
-
         public abstract UnityWebRequest CreateRequest();
 
         private Coroutine _lastCoroutine;
@@ -189,15 +194,11 @@ namespace CommonTools.JUnityHttp
         protected RequestBase DoSend(MonoBehaviour sender, Action done = null)
         {
             Prepare();
-            www = CreateRequest();
-            www.SetHeaders(header);
-            www.timeout = timeout;
-            _lastMono = sender;
-            _lastCoroutine = sender.StartCoroutine(DoSendIE(www, done));
+            _lastCoroutine = sender.StartCoroutine(DoSendIE(www, sender, done));
             return this;
         }
 
-        protected IEnumerator DoSendIE(UnityWebRequest www, Action done = null)
+        protected IEnumerator DoSendIE(UnityWebRequest www, MonoBehaviour sender, Action done = null)
         {
             if (isUsingCache && cacher != null && cacher.TryGetCache(this, out string data))
             {
@@ -206,13 +207,33 @@ namespace CommonTools.JUnityHttp
             }
             else
             {
+                IEnumerator SendWithRetry(int count)
+                {
+                    bool tmpSuccess = false;
+                    do
+                    {
+                        www = CreateRequest();
+                        www.SetHeaders(header);
+                        www.timeout = timeout;
+                        _lastMono = sender;
 #if UNITY_EDITOR
-                var async = www.SendWebRequest();
-                yield return new WaitUntil(() => async.isDone);
+                        var async = www.SendWebRequest();
+                        yield return new WaitUntil(() => async.isDone);
 #else
-                yield return  www.SendWebRequest();
+                        yield return  www.SendWebRequest();
 #endif
+                        count--;
+                        tmpSuccess = !www.isNetworkError && !www.isHttpError;
+                        if (!tmpSuccess)
+                        {
+                            yield return new WaitForSeconds(0.1f);
+                        }
+                    } while (count > 0 && !tmpSuccess);
+                }
 
+                yield return SendWithRetry(_retryCount);
+                isHttpError = www.isHttpError;
+                isNetworkError = www.isNetworkError;
                 isSuccess = !www.isNetworkError && !www.isHttpError;
                 error = www.error;
                 text = www.downloadHandler?.text;
@@ -223,9 +244,11 @@ namespace CommonTools.JUnityHttp
                 }
             }
 
+            Debug.Log(www == null);
             Complete();
             done?.Invoke();
         }
+
 
         /// <summary>
         /// set timeout by seconds
@@ -276,22 +299,6 @@ namespace CommonTools.JUnityHttp
         {
             result = this.result as T;
             return result;
-        }
-
-
-        public void Log(string text)
-        {
-            loger?.Log(text);
-        }
-
-        public void LogWarning(string text)
-        {
-            loger?.LogWarning(text);
-        }
-
-        public void LogError(string text)
-        {
-            loger?.LogError(text);
         }
     }
 }

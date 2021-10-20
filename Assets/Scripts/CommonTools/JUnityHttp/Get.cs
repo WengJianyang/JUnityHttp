@@ -22,12 +22,12 @@ namespace CommonTools.JUnityHttp
             {
                 url += $"?{string.Join("&", questData.Select(item => $"{item.Key}={item.Value}"))}";
             }
-            Log($"send-get=={url}");
+            loger?.Log($"send-get=={url}");
         }
 
         protected override void Complete()
         {
-            Log($"recv-get==backMsg=={text}\nerrorMsg=={error}\nform url=={url}");
+            loger?.Log($"recv-get==backMsg=={text}\nerrorMsg=={error}\nform url=={url}");
             base.Complete();
         }
     }

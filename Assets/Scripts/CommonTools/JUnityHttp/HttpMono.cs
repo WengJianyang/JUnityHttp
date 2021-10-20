@@ -27,7 +27,7 @@ namespace CommonTools.JUnityHttp
         }
 
 
-        public static void ForceDestory()
+        public static void ForceDestroy()
         {
             if (_instance)
             {

@@ -11,13 +11,13 @@ namespace CommonTools.JUnityHttp
         protected override void Prepare()
         {
             base.Prepare();
-            Log($"send-post=={url}");
+            loger?.Log($"send-post=={url}");
         }
 
 
         protected override void Complete()
         {
-            Log($"recv-post==backMsg=={text}\nerrorMsg=={error}\nform url=={url}");
+            loger?.Log($"recv-post==backMsg=={text}\nerrorMsg=={error}\nform url=={url}");
             base.Complete();
         }
 

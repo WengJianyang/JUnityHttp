@@ -36,7 +36,7 @@ namespace CommonTools.JUnityHttpSample
 
         protected override void Complete()
         {
-            Log($"Recv-WeatherPost==backMsg=={text}\nerrorMsg=={error}\nform url=={url}");
+            loger?.Log($"Recv-WeatherPost==backMsg=={text}\nerrorMsg=={error}\nform url=={url}");
 
             if (isSuccess)
             {
@@ -48,7 +48,7 @@ namespace CommonTools.JUnityHttpSample
                 catch (Exception e)
                 {
                     tmpData = null;
-                    LogError(e.ToString());
+                    loger?.Log(e.ToString());
                 }
                 finally
                 {

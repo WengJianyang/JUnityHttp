@@ -1,10 +1,11 @@
 using System;
 using CommonTools.JUnityHttp;
+using UnityEngine;
 using UnityEngine.Networking;
 
 namespace CommonTools.JUnityHttpSample
 {
-    public class WeatherPost<T>: RequestBase where T : class
+    public class WeatherPost<T> : RequestBase where T : class
     {
         //Discuss with back-end engineer to use only one data format globally. (DRY) or you need to write more than one another response-class.
         private class Response<T1> where T1 : class
@@ -18,15 +19,15 @@ namespace CommonTools.JUnityHttpSample
                 return status == "0";
             }
         }
-        
+
         public WeatherPost(string url) : base(url)
         {
         }
 
         protected override void Complete()
         {
-            Log($"Recv-WeatherPost==backMsg=={text}\nerrorMsg=={error}\nform url=={url}");
-
+            loger?.Log($"Recv-WeatherPost==backMsg=={text}\nerrorMsg=={error}\nform url=={url}");
+            Debug.Log(www == null);
             if (isSuccess)
             {
                 Response<T> tmpData = null;
@@ -37,7 +38,7 @@ namespace CommonTools.JUnityHttpSample
                 catch (Exception e)
                 {
                     tmpData = null;
-                    LogError(e.ToString());
+                    loger?.LogError(e.ToString());
                 }
                 finally
                 {
@@ -65,13 +66,13 @@ namespace CommonTools.JUnityHttpSample
             else
             {
                 string msg = !string.IsNullOrEmpty(error) ? error : text;
-                if (www.isNetworkError)
+                if (isNetworkError)
                 {
-                    error = $"network exception, please reset your network";
+                    error = $"network exception, please check up your network";
                 }
-                else if (www.isHttpError)
+                else if (isHttpError)
                 {
-                    error = $"http error,you can try it again.error={www.error}";
+                    error = $"http error,you can try it again.error={msg}";
                 }
 
                 onFailure?.Invoke(this);
@@ -83,9 +84,9 @@ namespace CommonTools.JUnityHttpSample
         protected override void Prepare()
         {
             base.Prepare();
-            loger?.Log($"Send-SamplePost={url}\nquest={questData.ToJson()}\n header={string.Join(",",header)}");
+            loger?.Log($"Send-SamplePost={url}\nquest={questData.ToJson()}\n header={string.Join(",", header)}");
         }
-        
+
         public override UnityWebRequest CreateRequest()
         {
             return UnityWebRequest.Post(url, questData);

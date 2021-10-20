@@ -10,6 +10,7 @@ namespace CommonTools.JUnityHttpSample
         {
             
             new WeatherPost<List<JCityInfo>>(ApiUrl.CityList)
+                .SetHeader("Authorization", "APPCODE 70d20881c6e54725a5d2c63598c9cf64")
                 .OnFailure(_ => { Debug.LogError(_.error); })
                 .OnSuccess(_ =>
                 {
