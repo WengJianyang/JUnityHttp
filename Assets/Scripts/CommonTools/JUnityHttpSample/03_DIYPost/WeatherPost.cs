@@ -27,7 +27,6 @@ namespace CommonTools.JUnityHttpSample
         protected override void Complete()
         {
             loger?.Log($"Recv-WeatherPost==backMsg=={text}\nerrorMsg=={error}\nform url=={url}");
-            Debug.Log(www == null);
             if (isSuccess)
             {
                 Response<T> tmpData = null;

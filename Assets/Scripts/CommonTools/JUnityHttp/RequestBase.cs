@@ -10,7 +10,7 @@ namespace CommonTools.JUnityHttp
     {
         public string url { get; protected set; } = null;
         public Dictionary<string, string> header = null;
-        public UnityWebRequest www { get; protected set; } = null;
+        public UnityWebRequest www { get; private set; } = null;
         public Dictionary<string, string> questData = new Dictionary<string, string>();
 
         public static int globalTimeout = 15; //seconds
@@ -194,11 +194,11 @@ namespace CommonTools.JUnityHttp
         protected RequestBase DoSend(MonoBehaviour sender, Action done = null)
         {
             Prepare();
-            _lastCoroutine = sender.StartCoroutine(DoSendIE(www, sender, done));
+            _lastCoroutine = sender.StartCoroutine(DoSendIE(sender, done));
             return this;
         }
 
-        protected IEnumerator DoSendIE(UnityWebRequest www, MonoBehaviour sender, Action done = null)
+        protected IEnumerator DoSendIE(MonoBehaviour sender, Action done = null)
         {
             if (isUsingCache && cacher != null && cacher.TryGetCache(this, out string data))
             {
@@ -244,7 +244,6 @@ namespace CommonTools.JUnityHttp
                 }
             }
 
-            Debug.Log(www == null);
             Complete();
             done?.Invoke();
         }
